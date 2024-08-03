@@ -1,0 +1,15 @@
+{
+	"id": "59e1ca2b-f395-45c2-8b26-1bce316f4ddb",
+	"values": [
+		{
+			"key": "authToken",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2024-08-03T18:05:17.241Z",
+	"_postman_exported_using": "Postman/11.6.2"
+}
