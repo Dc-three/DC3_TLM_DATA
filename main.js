@@ -13,7 +13,7 @@ newman.run({
     }
 
     const requestName = data.item.name.replace(/[^a-z0-9]/gi, '-');
-    const fileName = `response-${requestName}.txt`;
+    const fileName = `response-${requestName}.json`;
     const content = data.response.stream.toString();
     
     fs.writeFile(fileName, content, function (error) {
