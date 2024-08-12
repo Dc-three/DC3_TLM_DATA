@@ -137,6 +137,7 @@ print(df.head())
 # List of columns to delete
 columns_to_delete = [
     'EntityType', 
+    'readAttrs',
     'readTs',
     'ENTITY_FIELDTimestamp',
     'ActivityTimeTimestamp',
