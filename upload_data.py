@@ -7,8 +7,7 @@ data = pd.read_csv(csv_file_path)
 # Replace NaN with None (which translates to NULL in SQL)
 data = data.replace({np.nan: None, 'nan': None}, inplace=True)
 
-# Add logging to see if any NaN values are present before upload
-print(data.isnull().sum()) 
+
 
 
 # Define a function to preprocess datetime values
