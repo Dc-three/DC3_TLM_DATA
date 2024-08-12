@@ -4,10 +4,11 @@ import numpy as np
 from datetime import datetime
 csv_file_path = './final_output.csv'
 data = pd.read_csv(csv_file_path)
-# Replace NaN with None (which translates to NULL in SQL)
-data = data.replace({np.nan: None, 'nan': None}, inplace=True)
-
-
+if not data.empty:
+        data.replace({np.nan: None, 'nan': None}, inplace=True)
+else:
+        print("The DataFrame is empty.")
+        exit(1)
 
 
 # Define a function to preprocess datetime values
