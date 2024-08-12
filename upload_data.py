@@ -1,10 +1,11 @@
 import pandas as pd
 import mysql.connector
+import numpy as np
 from datetime import datetime
 csv_file_path = './final_output.csv'
 data = pd.read_csv(csv_file_path)
 # Replace NaN with None (which translates to NULL in SQL)
-data = data.where(pd.notnull(data), None)
+data = data.replace({np.nan: None, 'nan': None}, inplace=True)
 
 # Add logging to see if any NaN values are present before upload
 print(data.isnull().sum()) 
