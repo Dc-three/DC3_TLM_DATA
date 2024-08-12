@@ -14,14 +14,20 @@ def preprocess_datetime(value):
         
         
         if pd.isna(value):
-            return value.fillna(0) # Handle NaN values
-        # Handle various datetime formats here
-        return pd.to_datetime(value, errors='coerce').strftime('%H:%M:%S') if not pd.isnull(pd.to_datetime(value, errors='coerce')) else value
+            return 0 # Handle NaN values
+        # Attempt to parse and reformat the datetime value
+        datetime_value = pd.to_datetime(value, errors='coerce')
         
-    except ValueError:
-        # Handle errors or leave the value as is
-        return value
-
+        # If the conversion to datetime is successful, format it as 'HH:MM:SS'
+        if not pd.isnull(datetime_value):
+            return datetime_value.strftime('%H:%M:%S')
+        
+        # If the conversion fails (result is NaT), return 0
+        return 0
+    
+    except Exception as e:
+        # In case of any other errors, return 0
+        return 0
 # Apply preprocessing to the specific column containing datetime values
 # Replace 'your_datetime_column' with the actual column name
 if 'your_datetime_column' in data.columns:
