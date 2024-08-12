@@ -55,13 +55,15 @@ rename_dict = {
     'latest.ATTRIBUTE.WellName.ts': 'WellNameTimestamp',
     'latest.ATTRIBUTE.WellName.value' :'WellNameValue',
     'latest.ATTRIBUTE.ChemicalType.ts' : 'ChemicalTypeTimestamp',
-    'latest.ATTRIBUTE/ChemicalType.value': 'ChemicalTypeValue',
+    'latest.ATTRIBUTE.ChemicalType.value': 'ChemicalTypeValue',
     'latest.ATTRIBUTE.ProductName.ts': 'ProductNameTimestamp',
     'latest.ATTRIBUTE.ProductName.value':'ProductNameValue',
     'latest.ATTRIBUTE.InjectionPoint.ts': 'InjectionPointTimestamp',
     'latest.ATTRIBUTE.InjectionPoint.value':'InjectionPointValue',
     'latest.ATTRIBUTE.active.ts': 'ActiveTimestamp',
-    'latest.ATTRIBUTE.active.ts':'ActiveStatus',
+    'latest.ATTRIBUTE.active.value':'ActiveStatusValue',
+    'latest.ATTRIBUTE.ActivityTime.ts' : 'ActivityTimeTimestamp',
+    'latest.ATTRIBUTE.ActivityTime.value': 'ActivityTimeValue',
     'latest.TIME_SERIES.1100.ts':'OperatingModeTimestamp',
     'latest.TIME_SERIES.1100.value':'OperatingModeValue',
     'latest.TIME_SERIES.1103.ts':'MasterVolumeFlowTimestamp',
@@ -137,6 +139,8 @@ columns_to_delete = [
     'EntityType', 
     'readTs',
     'ENTITY_FIELDTimestamp',
+    'ActivityTimeTimestamp',
+    'ActivityTimeValue',
     
     # Add more columns to delete as needed
 ]
