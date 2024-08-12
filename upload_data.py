@@ -4,6 +4,10 @@ from datetime import datetime
 csv_file_path = './final_output.csv'
 data = pd.read_csv(csv_file_path)
 # Replace NaN with None (which translates to NULL in SQL)
+data = data.where(pd.notnull(data), None)
+
+# Add logging to see if any NaN values are present before upload
+print(data.isnull().sum()) 
 
 
 # Define a function to preprocess datetime values
