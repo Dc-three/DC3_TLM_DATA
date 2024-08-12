@@ -12,8 +12,9 @@ def preprocess_datetime(value):
         # Attempt to parse and reformat the datetime value
         # Adjust the format according to your needs
         
+        
         if pd.isna(value):
-            return value.where(pd.notnull(data), None) # Handle NaN values
+            return value.fillna(0) # Handle NaN values
         # Handle various datetime formats here
         return pd.to_datetime(value, errors='coerce').strftime('%H:%M:%S') if not pd.isnull(pd.to_datetime(value, errors='coerce')) else value
         
@@ -24,7 +25,7 @@ def preprocess_datetime(value):
 # Apply preprocessing to the specific column containing datetime values
 # Replace 'your_datetime_column' with the actual column name
 if 'your_datetime_column' in data.columns:
-    data['your_datetime_column'] = data['your_datetime_column'].apply(preprocess_datetime)
+    data['your_datetime_column'] = data['your_datetime_column'].apply(preprocess_datetime) 
 
 
 # Database connection details
