@@ -4,7 +4,7 @@ from datetime import datetime
 csv_file_path = './final_output.csv'
 data = pd.read_csv(csv_file_path)
 # Replace NaN with None (which translates to NULL in SQL)
-data = data.where(pd.notnull(data), None)
+
 
 # Define a function to preprocess datetime values
 def preprocess_datetime(value):
@@ -13,7 +13,7 @@ def preprocess_datetime(value):
         # Adjust the format according to your needs
         
         if pd.isna(value):
-            return value  # Handle NaN values
+            return value.where(pd.notnull(data), None) # Handle NaN values
         # Handle various datetime formats here
         return pd.to_datetime(value, errors='coerce').strftime('%H:%M:%S') if not pd.isnull(pd.to_datetime(value, errors='coerce')) else value
         
