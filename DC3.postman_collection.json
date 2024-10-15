@@ -11,16 +11,6 @@
 			"name": "Token Generator",
 			"event": [
 				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				},
-				{
 					"listen": "test",
 					"script": {
 						"exec": [
@@ -30,6 +20,16 @@
 							"pm.test(\"Status code is 200\", function () {\r",
 							"  pm.response.to.have.status(200);\r",
 							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
 							""
 						],
 						"type": "text/javascript",
@@ -66,26 +66,40 @@
 			"response": []
 		},
 		{
-			"name": "Controller and TLM data",
+			"name": "AttributeData",
 			"event": [
 				{
-					"listen": "prerequest",
+					"listen": "test",
 					"script": {
 						"exec": [
+							"pm.test(\"Verify Status code of AttributeData is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"  // Test script to capture the response body\r",
+							"pm.test(\"Capture response body\", function () {\r",
+							"    // Save the response body to an environment variable\r",
+							"    pm.globals.set(\"responseBody\", pm.response.text());\r",
+							"    // Test script to capture the response body\r",
+							"    // Retrieve the environment variable value\r",
+							"var myVar = pm.globals.get(\"responseBody\");\r",
 							"\r",
-							"console.log(pm.globals.get(\"authToken\"));"
+							"// Log the value to the console\r",
+							"console.log(\"Value of myVar:\", myVar);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
 						],
 						"type": "text/javascript",
 						"packages": {}
 					}
 				},
 				{
-					"listen": "test",
+					"listen": "prerequest",
 					"script": {
 						"exec": [
-							"pm.test(\"Verify Status code of Controller and TLM is 200\", function () {\r",
-							"  pm.response.to.have.status(200);\r",
-							"});\r",
 							""
 						],
 						"type": "text/javascript",
@@ -104,7 +118,78 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"entityFilter\":{\"type\":\"entityType\",\"resolveMultiple\":true,\"entityType\":\"DEVICE\"}, \"entityFields\":[{\"key\":\"name\",\"type\":\"ENTITY_FIELD\"}],\"latestValues\":[{\"key\":\"Area\",\"type\":\"ATTRIBUTE\"},{\"key\":\"WellName\",\"type\":\"ATTRIBUTE\"},{\"key\":\"InjectionPoint\",\"type\":\"ATTRIBUTE\"},{\"key\":\"ChemicalType\",\"type\":\"ATTRIBUTE\"},{\"key\":\"ProductName\",\"type\":\"ATTRIBUTE\"},{\"key\":\"1103\",\"type\":\"TIME_SERIES\"},{\"key\":\"1100\",\"type\":\"TIME_SERIES\"},{\"key\":\"1108\",\"type\":\"TIME_SERIES\"},{\"key\":\"1114\",\"type\":\"TIME_SERIES\"},{\"key\":\"1128\",\"type\":\"TIME_SERIES\"},{\"key\":\"1126\",\"type\":\"TIME_SERIES\"},{\"key\":\"varianceRate\",\"type\":\"TIME_SERIES\"},{\"key\":\"1120\",\"type\":\"TIME_SERIES\"},{\"key\":\"1124\",\"type\":\"TIME_SERIES\"},{\"key\":\"1122\",\"type\":\"TIME_SERIES\"},{\"key\":\"1118\",\"type\":\"TIME_SERIES\"},{\"key\":\"gallons\",\"type\":\"TIME_SERIES\"},{\"key\":\"9995\",\"type\":\"TIME_SERIES\"},{\"key\":\"1110\",\"type\":\"TIME_SERIES\"},{\"key\":\"1111\",\"type\":\"TIME_SERIES\"},{\"key\":\"1112\",\"type\":\"TIME_SERIES\"},{\"key\":\"1106\",\"type\":\"TIME_SERIES\"},{\"key\":\"1107\",\"type\":\"TIME_SERIES\"},{\"key\":\"1130\",\"type\":\"TIME_SERIES\"},{\"key\":\"1108\",\"type\":\"TIME_SERIES\"},{\"key\":\"active\",\"type\":\"ATTRIBUTE\"},{\"key\":\"ControllerStatus\",\"type\":\"TIME_SERIES\"},{\"key\":\"ActivityTime\",\"type\":\"ATTRIBUTE\"},{\"key\":\"APINo\",\"type\":\"ATTRIBUTE\"},{\"key\":\"CorpID\",\"type\":\"ATTRIBUTE\"}],\"pageLink\":{\"page\":0,\"pageSize\":4000}}",
+					"raw": "{\"entityFilter\":{\"type\":\"entityType\",\"resolveMultiple\":true,\"entityType\":\"DEVICE\"},\"entityFields\":[{\"key\":\"type\",\"type\":\"ENTITY_FIELD\"},{\"key\":\"name\",\"type\":\"ENTITY_FIELD\"}],\"latestValues\":[{\"key\":\"Area\",\"type\":\"ATTRIBUTE\"},{\"key\":\"WellName\",\"type\":\"ATTRIBUTE\"},{\"key\":\"InjectionPoint\",\"type\":\"ATTRIBUTE\"},{\"key\":\"ChemicalType\",\"type\":\"ATTRIBUTE\"},{\"key\":\"ProductName\",\"type\":\"ATTRIBUTE\"},{\"key\":\"ProdType\",\"type\":\"ATTRIBUTE\"},{\"key\":\"CostCenter\",\"type\":\"ATTRIBUTE\"},{\"key\":\"Customer\",\"type\":\"ATTRIBUTE\"},{\"key\":\"variance\",\"type\":\"ATTRIBUTE\"},{\"key\":\"Longitude\",\"type\":\"ATTRIBUTE\"},{\"key\":\"TankHeight\",\"type\":\"ATTRIBUTE\"},{\"key\":\"UntiNo\",\"type\":\"ATTRIBUTE\"},{\"key\":\"actdate\",\"type\":\"ATTRIBUTE\"},{\"key\":\"lastActivityTime\",\"type\":\"ATTRIBUTE\"},{\"key\":\"LeaseNo\",\"type\":\"ATTRIBUTE\"},{\"key\":\"MiradorSerialNo\",\"type\":\"ATTRIBUTE\"},{\"key\":\"FacilityID\",\"type\":\"ATTRIBUTE\"},{\"key\":\"Latitude\",\"type\":\"ATTRIBUTE\"},{\"key\":\"Offset\",\"type\":\"ATTRIBUTE\"},{\"key\":\"WellOperator\",\"type\":\"ATTRIBUTE\"},{\"key\":\"inactivityAlarmTime\",\"type\":\"ATTRIBUTE\"},{\"key\":\"inactivityTimeout\",\"type\":\"ATTRIBUTE\"},{\"key\":\"active\",\"type\":\"ATTRIBUTE\"},{\"key\":\"sensortype\",\"type\":\"ATTRIBUTE\"},{\"key\":\"sg\",\"type\":\"ATTRIBUTE\"},{\"key\":\"tanktype\",\"type\":\"ATTRIBUTE\"},{\"key\":\"APINo\",\"type\":\"ATTRIBUTE\"},{\"key\":\"SP_LowLevel\",\"type\":\"ATTRIBUTE\"},{\"key\":\"SP_LowInjectRate\",\"type\":\"ATTRIBUTE\"},{\"key\":\"SP_LoLoLevel\",\"type\":\"ATTRIBUTE\"},{\"key\":\"SP_LowPress\",\"type\":\"ATTRIBUTE\"},{\"key\":\"SP_LowPumpConstant\",\"type\":\"ATTRIBUTE\"},{\"key\":\"SP_LowVoltage\",\"type\":\"ATTRIBUTE\"},{\"key\":\"SP_MaxCurrent\",\"type\":\"ATTRIBUTE\"},{\"key\":\"SP_HighLevel\",\"type\":\"ATTRIBUTE\"},{\"key\":\"SP_HighPress\",\"type\":\"ATTRIBUTE\"},{\"key\":\"SP_High_Injection_Rate\",\"type\":\"ATTRIBUTE\"},{\"key\":\"Disable_RealTime_Emails\",\"type\":\"ATTRIBUTE\"},{\"key\":\"CorpID\",\"type\":\"ATTRIBUTE\"}],\"pageLink\":{\"page\":0,\"pageSize\":5000}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dc3control.net:443/api/entitiesQuery/find",
+					"protocol": "https",
+					"host": [
+						"dc3control",
+						"net"
+					],
+					"port": "443",
+					"path": [
+						"api",
+						"entitiesQuery",
+						"find"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TimeseriesData",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify Status code of TimeseriesData is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"  // Test script to capture the response body\r",
+							"pm.test(\"Capture response body\", function () {\r",
+							"    // Save the response body to an environment variable\r",
+							"    pm.globals.set(\"responseBody\", pm.response.text());\r",
+							"});\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\r",
+							"console.log(pm.globals.get(\"authToken\"));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Authorization",
+						"value": "Bearer {{authToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"entityFilter\":{\"type\":\"entityType\",\"resolveMultiple\":true,\"entityType\":\"DEVICE\"},\"entityFields\":[{\"key\":\"type\",\"type\":\"ENTITY_FIELD\"},{\"key\":\"name\",\"type\":\"ENTITY_FIELD\"}],\"latestValues\":[{\"key\":\"101\",\"type\":\"TIME_SERIES\"},{\"key\":\"102\",\"type\":\"TIME_SERIES\"},{\"key\":\"1101\",\"type\":\"TIME_SERIES\"},{\"key\":\"1102\",\"type\":\"TIME_SERIES\"},{\"key\":\"1104\",\"type\":\"TIME_SERIES\"},{\"key\":\"1105\",\"type\":\"TIME_SERIES\"},{\"key\":\"1115\",\"type\":\"TIME_SERIES\"},{\"key\":\"1116\",\"type\":\"TIME_SERIES\"},{\"key\":\"1150\",\"type\":\"TIME_SERIES\"},{\"key\":\"1151\",\"type\":\"TIME_SERIES\"},{\"key\":\"1152\",\"type\":\"TIME_SERIES\"},{\"key\":\"1153\",\"type\":\"TIME_SERIES\"},{\"key\":\"1178\",\"type\":\"TIME_SERIES\"},{\"key\":\"1192\",\"type\":\"TIME_SERIES\"},{\"key\":\"1194\",\"type\":\"TIME_SERIES\"},{\"key\":\"1196\",\"type\":\"TIME_SERIES\"},{\"key\":\"CSQ\",\"type\":\"TIME_SERIES\"},{\"key\":\"IMEI\",\"type\":\"TIME_SERIES\"},{\"key\":\"IMSI\",\"type\":\"TIME_SERIES\"},{\"key\":\"publish\",\"type\":\"TIME_SERIES\"},{\"key\":\"Status-1\",\"type\":\"TIME_SERIES\"},{\"key\":\"maxgallons\",\"type\":\"TIME_SERIES\"},{\"key\":\"targetA\",\"type\":\"TIME_SERIES\"},{\"key\":\"ContactReason\",\"type\":\"TIME_SERIES\"},{\"key\":\"pumpUtil\",\"type\":\"TIME_SERIES\"},{\"key\":\"sonic_rssi\",\"type\":\"TIME_SERIES\"},{\"key\":\"sonic_result_code\",\"type\":\"TIME_SERIES\"},{\"key\":\"BattLevel\",\"type\":\"TIME_SERIES\"},{\"key\":\"sensor_temp\",\"type\":\"TIME_SERIES\"},{\"key\":\"Ullage2\",\"type\":\"TIME_SERIES\"},{\"key\":\"FillGal\",\"type\":\"TIME_SERIES\"},{\"key\":\"rawData\",\"type\":\"TIME_SERIES\"},{\"key\":\"Data0\",\"type\":\"TIME_SERIES\"},{\"key\":\"BattVolt\",\"type\":\"TIME_SERIES\"},{\"key\":\"limit_1\",\"type\":\"TIME_SERIES\"},{\"key\":\"limit_2\",\"type\":\"TIME_SERIES\"},{\"key\":\"limit_3\",\"type\":\"TIME_SERIES\"},{\"key\":\"gsm_rat\",\"type\":\"TIME_SERIES\"},{\"key\":\"gsm_network_roaming_status\",\"type\":\"TIME_SERIES\"},{\"key\":\"RadarStatus\",\"type\":\"TIME_SERIES\"},{\"key\":\"BattEnergy\",\"type\":\"TIME_SERIES\"},{\"key\":\"SendAttempts\",\"type\":\"TIME_SERIES\"},{\"key\":\"RadarFirmware\",\"type\":\"TIME_SERIES\"},{\"key\":\"Gal1day\",\"type\":\"TIME_SERIES\"},{\"key\":\"Gal2day\",\"type\":\"TIME_SERIES\"},{\"key\":\"Gal3day\",\"type\":\"TIME_SERIES\"},{\"key\":\"Gal7day\",\"type\":\"TIME_SERIES\"},{\"key\":\"Orientation\",\"type\":\"TIME_SERIES\"},{\"key\":\"NetRSSI\",\"type\":\"TIME_SERIES\"},{\"key\":\"Variance1Day\",\"type\":\"TIME_SERIES\"},{\"key\":\"Variance7Day\",\"type\":\"TIME_SERIES\"},{\"key\":\"NewData\",\"type\":\"TIME_SERIES\"},{\"key\":\"1103\",\"type\":\"TIME_SERIES\"},{\"key\":\"1100\",\"type\":\"TIME_SERIES\"},{\"key\":\"1114\",\"type\":\"TIME_SERIES\"},{\"key\":\"1128\",\"type\":\"TIME_SERIES\"},{\"key\":\"1126\",\"type\":\"TIME_SERIES\"},{\"key\":\"1124\",\"type\":\"TIME_SERIES\"},{\"key\":\"varianceRate\",\"type\":\"TIME_SERIES\"},{\"key\":\"1120\",\"type\":\"TIME_SERIES\"},{\"key\":\"1122\",\"type\":\"TIME_SERIES\"},{\"key\":\"1118\",\"type\":\"TIME_SERIES\"},{\"key\":\"1110\",\"type\":\"TIME_SERIES\"},{\"key\":\"1111\",\"type\":\"TIME_SERIES\"},{\"key\":\"1112\",\"type\":\"TIME_SERIES\"},{\"key\":\"1106\",\"type\":\"TIME_SERIES\"},{\"key\":\"1107\",\"type\":\"TIME_SERIES\"},{\"key\":\"1130\",\"type\":\"TIME_SERIES\"},{\"key\":\"1108\",\"type\":\"TIME_SERIES\"},{\"key\":\"ControllerStatus\",\"type\":\"TIME_SERIES\"},{\"key\":\"9995\",\"type\":\"TIME_SERIES\"},{\"key\":\"Ullage\",\"type\":\"TIME_SERIES\"},{\"key\":\"gallons\",\"type\":\"TIME_SERIES\"},{\"key\":\"amount_to_full\",\"type\":\"TIME_SERIES\"},{\"key\":\"daysInv\",\"type\":\"TIME_SERIES\"}],\"pageLink\":{\"page\":0,\"pageSize\":5000}} ",
 					"options": {
 						"raw": {
 							"language": "json"

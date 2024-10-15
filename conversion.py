@@ -5,8 +5,8 @@ import json
 
 
 # Define the file paths
-input_file_path = './response-Controller-and-TLM-data.json'
-output_file_path = './redefined-data.csv'
+input_file_path = './response-AttributeData.json'
+output_file_path = './response-AttributeData.csv'
 
 
         
@@ -34,7 +34,7 @@ df.to_csv(output_file_path, index=False)
 print(f"Data has been successfully processed and saved to {output_file_path}")
 
 
-file_path = './redefined-data.csv'
+file_path = './response-AttributeData.csv'
 df = pd.read_csv(file_path)
 
 # Display the first few rows of the DataFrame
@@ -54,58 +54,106 @@ rename_dict = {
     'latest.ATTRIBUTE.CorpID.value': 'CorpIDValue',
     'latest.ATTRIBUTE.WellName.ts': 'WellNameTimestamp',
     'latest.ATTRIBUTE.WellName.value' :'WellNameValue',
+    'latest.ATTRIBUTE.WellOperator.ts':'WellOperatorTimestamp',
+    'latest.ATTRIBUTE.WellOperator.value':'WellOperatorValue',
     'latest.ATTRIBUTE.ChemicalType.ts' : 'ChemicalTypeTimestamp',
     'latest.ATTRIBUTE.ChemicalType.value': 'ChemicalTypeValue',
     'latest.ATTRIBUTE.ProductName.ts': 'ProductNameTimestamp',
     'latest.ATTRIBUTE.ProductName.value':'ProductNameValue',
+    'latest.ATTRIBUTE.ProdType.ts':'ProdTypeTimestamp',
+    'latest.ATTRIBUTE.ProdType.value':'ProdTypeValue',
     'latest.ATTRIBUTE.InjectionPoint.ts': 'InjectionPointTimestamp',
     'latest.ATTRIBUTE.InjectionPoint.value':'InjectionPointValue',
     'latest.ATTRIBUTE.active.ts': 'ActiveTimestamp',
     'latest.ATTRIBUTE.active.value':'ActiveStatusValue',
-    'latest.ATTRIBUTE.ActivityTime.ts' : 'ActivityTimeTimestamp',
-    'latest.ATTRIBUTE.ActivityTime.value': 'ActivityTimeValue',
-    'latest.TIME_SERIES.1100.ts':'OperatingModeTimestamp',
-    'latest.TIME_SERIES.1100.value':'OperatingModeValue',
-    'latest.TIME_SERIES.1103.ts':'MasterVolumeFlowTimestamp',
-    'latest.TIME_SERIES.1103.value':'MasterVolumeFlowValue',
-    'latest.TIME_SERIES.1106.ts':'PumpOperatingOnTimeTimestamp',
-    'latest.TIME_SERIES.1106.value':'PumpOperatingOnTimeValue',
-    'latest.TIME_SERIES.1107.ts':'PumpOperatingCycleTimeTimestamp',
-    'latest.TIME_SERIES.1107.value':'PumpOperatingCycleTimeValue',
-    'latest.TIME_SERIES.1108.ts':'AmbientTemperatureTimestamp',
-    'latest.TIME_SERIES.1108.value':'AmbientTemperatureValue',
-    'latest.TIME_SERIES.1110.ts':'PeakPumpCurrentTimestamp',
-    'latest.TIME_SERIES.1110.value':'PeakPumpCurrentValue',
-    'latest.TIME_SERIES.1111.ts':'AveragePumpCurrentCalculatedTimestamp',
-    'latest.TIME_SERIES.1111.value':'AveragePumpCurrentCalculatedValue',
-    'latest.TIME_SERIES.1112.ts':'CurrentPumpConstantTimestamp',
-    'latest.TIME_SERIES.1112.value':'CurrentPumpConstantValue',
-    'latest.TIME_SERIES.1114.ts':'TargetInjectionRateSetPointforAutoVolumeModeTimestamp',
-    'latest.TIME_SERIES.1114.value':'TargetInjectionRateSetPointforAutoVolumeModeValue',
-    'latest.TIME_SERIES.1118.ts':'TankLevelTimestamp',
-    'latest.TIME_SERIES.1118.value':'TankLevelValue',
-    'latest.TIME_SERIES.1120.ts':'Amountpumpedthis24HrcontractperiodTimestamp',
-    'latest.TIME_SERIES.1120.value':'Amountpumpedthis24HrcontractperiodValue',
-    'latest.TIME_SERIES.1122.ts':'Amountpumpedprevious24HrcontractperiodTimestamp',
-    'latest.TIME_SERIES.1122.value':'Amountpumpedprevious24HrcontractperiodValue',
-    'latest.TIME_SERIES.1124.ts':'ActualInjectionRateTimestamp',
-    'latest.TIME_SERIES.1124.value':'ActualInjectionRateValue',
-    'latest.TIME_SERIES.1126.ts':'TargetInjectionRateTimestamp',
-    'latest.TIME_SERIES.1126.value':'TargetInjectionRateValue',
-    'latest.TIME_SERIES.1128.ts':'TargetRatioforAutoTrackModeTimestamp',
-    'latest.TIME_SERIES.1128.value':'TargetRatioforAutoTrackModeValue',
-    'latest.TIME_SERIES.1130.ts':'HighTemperatureShutoffPointTimestamp',
-    'latest.TIME_SERIES.1130.value':'HighTemperatureShutoffPointValue',
-    'latest.TIME_SERIES.9995.ts':'SupplyvoltageoftheCIControllerTimestamp',
-    'latest.TIME_SERIES.9995.value':'SupplyvoltageoftheCIControllerValue',
-    'latest.TIME_SERIES.varianceRate.ts':'VarianceRateTimestamp',
-    'latest.TIME_SERIES.varianceRate.value':'VarianceRateValue',
-    'latest.TIME_SERIES.ControllerStatus.ts':'ControllerStatusTimestamp',
-    'latest.TIME_SERIES.ControllerStatus.value':'ControllerStatusValue',
-    'latest.TIME_SERIES.gallons.ts':'GallonsTimestamp',
-    'latest.TIME_SERIES.gallons.value':'GallonsValue',
-    'latest.ENTITY_FIELD.name.ts':'ENTITY_FIELDTimestamp',
-    'latest.ENTITY_FIELD.name.value':'ENTITY_FIELDValue',
+    'latest.ATTRIBUTE.Customer.ts': 'CustomerTimestamp',
+    'latest.ATTRIBUTE.Customer.value':'CustomerValue',
+    'latest.ATTRIBUTE.variance.ts':'VarianceTimestamp',
+    'latest.ATTRIBUTE.variance.value':'VarianceValue',
+
+    
+    'activitytimetimestamp' : 'ActivityTimeTimestamp',
+
+    'latest.ATTRIBUTE.SP_LowVoltage.ts':'SPlowVoltageTimestamp',
+    'latest.ATTRIBUTE.SP_LowVoltage.value':'SPlowVoltageValue',
+    'latest.ATTRIBUTE.SP_LowLevel.ts':'SPLowLevelTimestamp',
+    'latest.ATTRIBUTE.SP_LowLevel.value':'SPLowLevelValue',
+    'latest.ATTRIBUTE.SP_LowPress.ts':'SPLowpressTimestamp',
+    'latest.ATTRIBUTE.SP_LowPress.value':'SPLowpressValue',
+    'latest.ATTRIBUTE.SP_LowInjectRate.ts':'SPLowInjectRateTimestamp',
+    'latest.ATTRIBUTE.SP_LowInjectRate.value':'SPLowInjectRateValue',
+    'latest.ATTRIBUTE.SP_LowPumpConstant.ts':'SPLowPumpConstantTimestamp',
+    'latest.ATTRIBUTE.SP_LowPumpConstant.value':'SPLowPumpConstantValue',
+    'latest.ATTRIBUTE.SP_LoLoLevel.ts':'SPLoLoLevelTimestamp',
+    'latest.ATTRIBUTE.SP_LoLoLevel.value':'SPLoLoLevelValue',
+    'latest.ATTRIBUTE.SP_High_Injection_Rate.ts':'SPHighInjectionRateTimestamp',
+    'latest.ATTRIBUTE.SP_High_Injection_Rate.value':'SPHighInjectionRateValue',
+    'latest.ATTRIBUTE.SP_HighPress.ts':'SPHighpressTimestamp',
+    'latest.ATTRIBUTE.SP_HighPress.value':'SPHighpressValue',
+    'latest.ATTRIBUTE.SP_HighLevel.ts':'SPHighLevelTimestamp',
+    'latest.ATTRIBUTE.SP_HighLevel.value':'SPHighLevelValue',
+    'latest.ATTRIBUTE.SP_MaxCurrent.ts':'SPMaxCurrentTimestamp',
+    'latest.ATTRIBUTE.SP_MaxCurrent.value':'SPMaxCurrentValue',
+    'latest.ATTRIBUTE.sg.ts': 'sgTimestamp',
+    'latest.ATTRIBUTE.sg.value': 'sgValue',
+
+    'latest.ATTRIBUTE.Latitude.ts': 'LattitudeTimestamp',
+    'latest.ATTRIBUTE.Latitude.value': 'LattitudeValue',
+    'latest.ATTRIBUTE.Longitude.ts': 'LongitudeTimestamp',
+    'latest.ATTRIBUTE.Longitude.value': 'LongitudeValue',
+    'latest.ATTRIBUTE.Offset.ts':'OffsetTimestamp',
+    'latest.ATTRIBUTE.Offset.value':'OffsetValue',
+    'latest.ATTRIBUTE.tanktype.ts':'TankTypeTimestamp',
+    'latest.ATTRIBUTE.tanktype.value':'TankTypeValue',
+    'latest.ATTRIBUTE.TankHeight.ts':'TankHeightTimestamp',
+    'latest.ATTRIBUTE.TankHeight.value':'TankHeightValue',
+    'latest.ATTRIBUTE.lastActivityTime.ts':'LastActivityTimestamp',
+    'latest.ATTRIBUTE.lastActivityTime.value':'LastActivityValue',
+    'latest.ATTRIBUTE.actdate.ts':'ActDateTimestamp',
+    'latest.ATTRIBUTE.actdate.value':'ActDateValue',
+    'latest.ATTRIBUTE.inactivityAlarmTime.ts':'InactivityAlarmTimestamp',
+    'latest.ATTRIBUTE.inactivityAlarmTime.value':'InactivityAlarmValue',
+    'latest.ATTRIBUTE.Disable_RealTime_Emails.ts':'RealTimeEmailTimestamp',
+    'latest.ATTRIBUTE.Disable_RealTime_Emails.value':'RealTimeEmailValue',
+    'latest.ATTRIBUTE.FacilityID.ts':'FacilityIDTimestamp',
+    'latest.ATTRIBUTE.FacilityID.value':'FacilityIDValue',
+    'latest.ATTRIBUTE.inactivityTimeout.ts':'InactivityTimeoutTimestamp',
+    'latest.ATTRIBUTE.inactivityTimeout.value':'InactivityTimeoutValue',
+    'latest.ATTRIBUTE.CostCenter.ts':'CostCenterTimestamp',
+    'latest.ATTRIBUTE.CostCenter.value':'CostCenterValue',
+    'latest.ATTRIBUTE.UntiNo.ts':'UntilNoTimestamp',
+    'latest.ATTRIBUTE.UntiNo.value':'UntilNoValue',
+    'latest.ATTRIBUTE.LeaseNo.ts':'LeaseNoTimestamp',
+    'latest.ATTRIBUTE.LeaseNo.value':'LeaseNoValue',
+    'latest.ATTRIBUTE.sensortype.ts':'SensorTypeTimestamp',
+    'latest.ATTRIBUTE.sensortype.value':'SensorTypeValue',
+    'latest.ATTRIBUTE.MiradorSerialNo.ts':'MiradorSerialNoTimestamp',
+    'latest.ATTRIBUTE.MiradorSerialNo.value':'MiradorSerialNoValue',
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    'latest.ENTITY_FIELD.name.ts':'ENTITYFIELDTimestamp',
+    'latest.ENTITY_FIELD.name.value':'ENTITYFIELDValue',
+    'latest.ENTITY_FIELD.type.value':'ENTITYFIELDTypeValue',
+    'latest.ENTITY_FIELD.type.ts' : 'ENTITYFIELDTs',
+
 
 
 
@@ -139,9 +187,48 @@ columns_to_delete = [
     'EntityType', 
     'readAttrs',
     'readTs',
-    'ENTITY_FIELDTimestamp',
-    'ActivityTimeTimestamp',
-    'ActivityTimeValue',
+    'ENTITYFIELDTs',
+    'ENTITYFIELDTimestamp',
+    'SPlowVoltageTimestamp',
+    'SPHighInjectionRateTimestamp',
+    'CorpIDTimestamp',
+    'ChemicalTypeTimestamp',
+    'CustomerTimestamp',
+    'SPLowLevelTimestamp',
+    'SPLowpressTimestamp',
+    'LattitudeTimestamp',
+    'WellOperatorTimestamp',
+    'InactivityAlarmTimestamp',
+    'SPLowInjectRateTimestamp',
+    'RealTimeEmailTimestamp',
+    'FacilityIDTimestamp',
+    'InactivityTimeoutTimestamp',
+    'CostCenterTimestamp',
+    'sgTimestamp',
+    'SPLoLoLevelTimestamp',
+    'SPHighpressTimestamp',
+    'UntilNoTimestamp',
+    'APINoTimestamp',
+    'WellNameTimestamp',
+    'LeaseNoTimestamp',
+    'SPLowPumpConstantTimestamp',
+    'SPMaxCurrentTimestamp',
+    'SPHighLevelTimestamp',
+    'InjectionPointTimestamp',
+    'ProdTypeTimestamp',
+    'SensorTypeTimestamp',
+    'MiradorSerialNoTimestamp',
+    'LongitudeTimestamp',
+    'OffsetTimestamp',
+    'TankTypeTimestamp',
+    'TankHeightTimestamp',
+    'AreaTimestamp',
+    'VarianceTimestamp',
+
+
+
+    
+    
     
     # Add more columns to delete as needed
 ]
@@ -171,11 +258,7 @@ print(df.head())
 
 
 # Save the modified DataFrame to a new CSV file
-output_file_path = './final_output.csv'
+output_file_path ='./final_ATTRIBUTE_DATA.csv'
 df.to_csv(output_file_path, index=False)
 
 print(f'Modified file saved to {output_file_path}')
-
-
-
-
