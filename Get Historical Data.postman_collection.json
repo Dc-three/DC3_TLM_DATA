@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "71046f69-4805-41c4-a902-2b8e139d9512",
+		"name": "Get Historical Data",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36819883"
+	},
+	"item": [
+		{
+			"name": "Token Generator",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.globals.set(\"authToken\", jsonData.token); \r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"DC3_user_API@sp-i4.com\",\r\n    \"password\": \"Dc3APi2024!!\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dc3control.net/api/auth/login",
+					"protocol": "https",
+					"host": [
+						"dc3control",
+						"net"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fillAmount_data",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Authorization",
+						"value": "Bearer {{authToken}}",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "keys",
+							"value": "fillAmount",
+							"type": "text"
+						},
+						{
+							"key": "startTs",
+							"value": "1738550313000",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "endTs",
+							"value": "1739064888000",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://dc3control.net:443/api/plugins/telemetry/DEVICE/{{deviceId}}/values/timeseries?keys=fillAmount",
+					"protocol": "https",
+					"host": [
+						"dc3control",
+						"net"
+					],
+					"port": "443",
+					"path": [
+						"api",
+						"plugins",
+						"telemetry",
+						"DEVICE",
+						"{{deviceId}}",
+						"values",
+						"timeseries"
+					],
+					"query": [
+						{
+							"key": "keys",
+							"value": "fillAmount"
+						},
+						{
+							"key": "startTs",
+							"value": "173781208800",
+							"disabled": true
+						},
+						{
+							"key": "endTs",
+							"value": "173914563300",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
